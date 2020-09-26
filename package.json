@@ -1,0 +1,17 @@
+{
+  "name": "bumber",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "watch": "tsc -w",
+    "start": "node dist/index",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "discord.js": "12"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.3"
+  }
+}
