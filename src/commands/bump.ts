@@ -5,9 +5,8 @@ import logger from '../logger';
 
 const tasks: Record<string, CronJob> = {};
 
-export default (message: Message, ...args: string[]): void => {
+export default (message: Message, task?: string, ...rest: string[]): void => {
   const [rawCommand] = message.content.split(' ');
-  const [task] = args;
   const taskID = message.channel.id;
   message.delete();
   if (task === 'start') {
@@ -22,10 +21,9 @@ export default (message: Message, ...args: string[]): void => {
     } catch (e) {
       logger.error(`Unable to start the task (channel: ${message.channel.id}, content: "${message.content}")`);
     }
-  } else if (task !== undefined) {
+  } else if (task === 'plan') {
     try {
-      tasks[taskID] = new CronJob(args.join(' '), () => message.channel.send(rawCommand));
-      tasks[taskID].start();
+      tasks[taskID] = new CronJob(rest.join(' '), () => message.channel.send(rawCommand));
     } catch (e) {
       logger.error(`Incorrect cron pattern (channel: ${message.channel.id}, content: "${message.content}")`);
     }
