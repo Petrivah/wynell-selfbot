@@ -1,13 +1,12 @@
 import { config } from 'dotenv';
 import { Client } from 'discord.js';
 
-import createLogger from './logger';
+import logger from './logger';
 import runCommand from './commands';
 
 config();
 
 const client = new Client();
-const logger = createLogger();
 
 client.on('ready', () => {
   logger.info(`Logged in as ${client.user?.tag}`);
